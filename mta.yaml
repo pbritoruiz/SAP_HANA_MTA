@@ -1,3 +1,19 @@
 ID: SAP_HANA_MTA
 _schema-version: '2.1'
 version: 0.0.1
+
+modules:
+ - name: APP
+   type: hdb
+   path: APP
+   requires:
+    - name: hdi_APP
+
+resources:
+ - name: hdi_APP
+   parameters:
+      config:
+         schema: SAP_HANA_MTA
+   properties:
+      hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container
