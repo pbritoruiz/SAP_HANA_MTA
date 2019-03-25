@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="PurchaseHeader" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false" runWithInvokerPrivileges="false">
+<descriptions defaultDescription="PurchaseHeader"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="PurchaseOrder.Header">
+    <resourceUri>PurchaseOrder.Header</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="PurchaseOrder.Header">
+  <attributes>
+    <attribute id="HISTORY_CREATEDBY" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Created By"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="HISTORY.CREATEDBY"/>
+    </attribute>
+    <attribute id="HISTORY_CREATEDAT" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Created Date"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="HISTORY.CREATEDAT"/>
+    </attribute>
+    <attribute id="HISTORY_CHANGEDBY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Changed By"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="HISTORY.CHANGEDBY"/>
+    </attribute>
+    <attribute id="HISTORY_CHANGEDAT" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Change Date"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="HISTORY.CHANGEDAT"/>
+    </attribute>
+    <attribute id="NOTEID" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Notes"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="NOTEID"/>
+    </attribute>
+    <attribute id="PARTNER" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Supplier"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="PARTNER"/>
+    </attribute>
+    <attribute id="CURRENCY" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Currency"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="LIFECYCLESTATUS" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Lifecycle Status"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="LIFECYCLESTATUS"/>
+    </attribute>
+    <attribute id="APPROVALSTATUS" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Approval Status"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="APPROVALSTATUS"/>
+    </attribute>
+    <attribute id="CONFIRMSTATUS" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Confirmation Status"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="CONFIRMSTATUS"/>
+    </attribute>
+    <attribute id="ORDERINGSTATUS" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Ordering Status"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="ORDERINGSTATUS"/>
+    </attribute>
+    <attribute id="INVOICINGSTATUS" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Invoicing Status"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="INVOICINGSTATUS"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="PURCHASEORDERID" order="1" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Purchase Order ID"/>
+      <measureMapping columnObjectName="PurchaseOrder.Header" columnName="PURCHASEORDERID"/>
+    </measure>
+    <measure id="GROSSAMOUNT" order="9" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Gross Amount"/>
+      <measureMapping columnObjectName="PurchaseOrder.Header" columnName="GROSSAMOUNT"/>
+    </measure>
+    <measure id="NETAMOUNT" order="10" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Net Amount"/>
+      <measureMapping columnObjectName="PurchaseOrder.Header" columnName="NETAMOUNT"/>
+    </measure>
+    <measure id="TAXAMOUNT" order="11" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Tax Amount"/>
+      <measureMapping columnObjectName="PurchaseOrder.Header" columnName="TAXAMOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

@@ -9,6 +9,9 @@ modules:
    requires:
     - name: hdi_APP
 
+
+ 
+
 resources:
  - name: hdi_APP
    parameters:
@@ -17,3 +20,18 @@ resources:
    properties:
       hdi-container-name: ${service-name}
    type: com.sap.xs.hdi-container
+
+ - name: uaa_SAP_HANA_MTA
+   parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+   type: org.cloudfoundry.managed-service
+
+
+ - name: dest_SAP_HANA_MTA
+   parameters:
+      service-plan: lite
+      service: destination
+   type: org.cloudfoundry.managed-service
+
