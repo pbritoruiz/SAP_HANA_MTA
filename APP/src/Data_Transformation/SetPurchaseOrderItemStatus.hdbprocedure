@@ -1,0 +1,20 @@
+PROCEDURE "SAP_HANA_MTA.APP.Data_Transformation::SetPurchaseOrderItemStatus"( )
+   LANGUAGE SQLSCRIPT
+AS
+BEGIN
+   
+	DECLARE CURSOR csPurchaseOrderItems FOR
+		SELECT "POHeader.PURCHASEORDERID" AS PurchaseOrderId,
+			   "PRODUCT" AS ProductId
+		FROM "SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.Item";
+
+	FOR csRegister as csPurchaseOrderItems DO
+   
+		UPSERT "SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.ItemStatus"
+		VALUES 
+			(csRegister.PurchaseOrderId, csRegister.ProductId, 'S')
+		WITH PRIMARY KEY;
+
+	END FOR;
+	
+END;

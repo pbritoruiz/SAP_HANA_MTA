@@ -1,0 +1,30 @@
+namespace SAP_HANA_MTA.APP.Data_Base;
+
+using SAP_HANA_MTA.APP.Data_Base::PurchaseOrder as PurchaseOrder;
+
+context PurchaseOrderView {
+    @Comment : 'Purchase Order Item View'
+    define view ItemView as
+        select from PurchaseOrder.Item as Item
+        inner join PurchaseOrder.Header as Header on Header.PURCHASEORDERID = Item.POHeader.PURCHASEORDERID
+        left join PurchaseOrder.ItemStatus as ItemStatus on Header.PURCHASEORDERID = ItemStatus.POHeader.PURCHASEORDERID and
+        						Item.PRODUCT = ItemStatus.PRODUCT.PRODUCT
+        {
+            Header.PURCHASEORDERID as "PurchaseOrderItemId",
+            Header.PARTNER         as "PartnerId",
+            Header.GROSSAMOUNT     as "AmountTotal",
+            Header.NETAMOUNT       as "NetAmountTotal",
+            Header.TAXAMOUNT        as "TaxAmountTotal",
+            Item.PRODUCT           as "ProductID",
+            Item.CURRENCY          as "CurrencyCode",
+            Item.GROSSAMOUNT       as "Amount",
+            Item.NETAMOUNT         as "NetAmount",
+            Item.TAXAMOUNT         as "TaxAmount",
+            Item.QUANTITY          as "Quantity",
+            Item.QUANTITYUNIT      as "QuantityUnit",
+            Item.DELIVERYDATE      as "DeliveryDate",
+            (Item.GROSSAMOUNT / Item.QUANTITY) as "Price",
+            (Item.NETAMOUNT / Item.QUANTITY) as "NetPrice",
+            coalesce(ItemStatus.Status, 'Não Processado') as "Status"
+        };
+};
