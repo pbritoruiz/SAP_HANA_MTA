@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="SAP_HANA_MTA.APP.Data_Transformation::CV_PURCHASEORDERHEADER" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_PURCHASEORDERHEADER"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.Header">
+    <resourceUri>SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.Header</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.Header">
+  <attributes>
+    <attribute id="PURCHASEORDERID" order="1" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Purchase Order ID"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="PURCHASEORDERID"/>
+    </attribute>
+    <attribute id="PARTNER" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Supplier"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="PARTNER"/>
+    </attribute>
+    <attribute id="CURRENCY" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Currency"/>
+      <keyMapping columnObjectName="PurchaseOrder.Header" columnName="CURRENCY"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="NETAMOUNT" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Net Amount"/>
+      <measureMapping columnObjectName="PurchaseOrder.Header" columnName="NETAMOUNT"/>
+    </measure>
+    <measure id="GROSSAMOUNT" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Gross Amount"/>
+      <measureMapping columnObjectName="PurchaseOrder.Header" columnName="GROSSAMOUNT"/>
+    </measure>
+    <measure id="TAXAMOUNT" order="6" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Tax Amount"/>
+      <measureMapping columnObjectName="PurchaseOrder.Header" columnName="TAXAMOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

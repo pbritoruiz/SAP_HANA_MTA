@@ -14,7 +14,7 @@ context PurchaseOrderView {
             Header.PARTNER         as "PartnerId",
             Header.GROSSAMOUNT     as "AmountTotal",
             Header.NETAMOUNT       as "NetAmountTotal",
-            Header.TAXAMOUNT        as "TaxAmountTotal",
+            Header.TAXAMOUNT       as "TaxAmountTotal",
             Item.PRODUCT           as "ProductID",
             Item.CURRENCY          as "CurrencyCode",
             Item.GROSSAMOUNT       as "Amount",
@@ -25,6 +25,7 @@ context PurchaseOrderView {
             Item.DELIVERYDATE      as "DeliveryDate",
             (Item.GROSSAMOUNT / Item.QUANTITY) as "Price",
             (Item.NETAMOUNT / Item.QUANTITY) as "NetPrice",
+            (Item.NETAMOUNT / Header.NETAMOUNT) as "NetPerc",
             coalesce(ItemStatus.Status, 'Não Processado') as "Status"
         };
 };

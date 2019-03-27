@@ -1,20 +1,32 @@
-PROCEDURE "SAP_HANA_MTA.APP.Data_Transformation::SetPurchaseOrderItemStatus"( )
+PROCEDURE "SAP_HANA_MTA.APP.Data_Transformation::SetPurchaseOrderItemStatus"( 
+	--OUT Result "DM_CLIENTE"."DM_CLIENTE_INTEGRACAO.database::entities.Result" 
+)
    LANGUAGE SQLSCRIPT
 AS
 BEGIN
-   
-	DECLARE CURSOR csPurchaseOrderItems FOR
-		SELECT "POHeader.PURCHASEORDERID" AS PurchaseOrderId,
-			   "PRODUCT" AS ProductId
-		FROM "SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.Item";
 
-	FOR csRegister as csPurchaseOrderItems DO
-   
-		UPSERT "SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.ItemStatus"
-		VALUES 
-			(csRegister.PurchaseOrderId, csRegister.ProductId, 'S')
-		WITH PRIMARY KEY;
-
-	END FOR;
+   --DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+   -- 	Result = SELECT ::SQL_ERROR_CODE AS CODE, 
+	--		    		::SQL_ERROR_MESSAGE AS MESSAGE
+	--		     FROM DUMMY; 
+   --BEGIN
+		DECLARE CURSOR csPurchaseOrderItems FOR
+			SELECT "POHeader.PURCHASEORDERID" AS PurchaseOrderId,
+				   "PRODUCT" AS ProductId
+			FROM "SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.Item";
+	
+		FOR csRegister as csPurchaseOrderItems DO
+	   
+			UPSERT "SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.ItemStatus"
+			VALUES 
+				(csRegister.PurchaseOrderId, csRegister.ProductId, 'S')
+			WITH PRIMARY KEY;
+	
+		END FOR;
+		
+	--	Result = SELECT '0' AS CODE,
+	--		   		    'Success' AS MESSAGE
+	--		     FROM DUMMY;
+	--END;
 	
 END;

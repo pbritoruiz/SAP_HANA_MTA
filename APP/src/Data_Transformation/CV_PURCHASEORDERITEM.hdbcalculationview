@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="SAP_HANA_MTA.APP.Data_Transformation::CV_PURCHASEORDERITEM" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_PURCHASEORDERITEM"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="SAP_HANA_MTA.APP.Data_Transformation::CV_PURCHASEORDERHEADER">
+    <resourceUri>SAP_HANA_MTA.APP.Data_Transformation::CV_PURCHASEORDERHEADER</resourceUri>
+  </DataSource>
+  <DataSource id="SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.Item">
+    <resourceUri>SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.Item</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="PURCHASEORDERID">
+        <descriptions defaultDescription="Purchase Order ID"/>
+      </viewAttribute>
+      <viewAttribute id="PARTNER">
+        <descriptions defaultDescription="Supplier"/>
+      </viewAttribute>
+      <viewAttribute id="GROSSAMOUNTTOTAL" aggregationType="sum">
+        <descriptions defaultDescription="Gross Amount"/>
+      </viewAttribute>
+      <viewAttribute id="NETAMOUNTTOTAL" aggregationType="sum">
+        <descriptions defaultDescription="Net Amount"/>
+      </viewAttribute>
+      <viewAttribute id="TAXAMOUNTTOTAL" aggregationType="sum">
+        <descriptions defaultDescription="Tax Amount"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCT">
+        <descriptions defaultDescription="Product ID"/>
+      </viewAttribute>
+      <viewAttribute id="CURRENCY">
+        <descriptions defaultDescription="Currency"/>
+      </viewAttribute>
+      <viewAttribute id="GROSSAMOUNT" aggregationType="sum">
+        <descriptions defaultDescription="Gross Amount"/>
+      </viewAttribute>
+      <viewAttribute id="NETAMOUNT" aggregationType="sum">
+        <descriptions defaultDescription="Net Amount"/>
+      </viewAttribute>
+      <viewAttribute id="TAXAMOUNT" aggregationType="sum">
+        <descriptions defaultDescription="Tax Amount"/>
+      </viewAttribute>
+      <viewAttribute id="QUANTITY" aggregationType="sum">
+        <descriptions defaultDescription="Quantity"/>
+      </viewAttribute>
+      <viewAttribute id="QUANTITYUNIT">
+        <descriptions defaultDescription="Quantity Unit"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="TESTE" datatype="VARCHAR" length="13" expressionLanguage="COLUMN_ENGINE">
+        <formula>'teste'</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+    <input node="SAP_HANA_MTA.APP.Data_Transformation::CV_PURCHASEORDERHEADER">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERID" source="PURCHASEORDERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARTNER" source="PARTNER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="GROSSAMOUNTTOTAL" source="GROSSAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNTTOTAL" source="NETAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TAXAMOUNTTOTAL" source="TAXAMOUNT"/>
+    </input>
+    <input node="SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.Item">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="GROSSAMOUNT" source="GROSSAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NETAMOUNT" source="NETAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TAXAMOUNT" source="TAXAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY" source="QUANTITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYUNIT" source="QUANTITYUNIT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PURCHASEORDERID" source="POHeader.PURCHASEORDERID"/>
+    </input>
+    <joinAttribute name="PURCHASEORDERID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="PURCHASEORDERID" order="1" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Purchase Order ID"/>
+      <keyMapping columnObjectName="Join_1" columnName="PURCHASEORDERID"/>
+    </attribute>
+    <attribute id="PARTNER" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Supplier"/>
+      <keyMapping columnObjectName="Join_1" columnName="PARTNER"/>
+    </attribute>
+    <attribute id="PRODUCT" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Product ID"/>
+      <keyMapping columnObjectName="Join_1" columnName="PRODUCT"/>
+    </attribute>
+    <attribute id="CURRENCY" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Currency"/>
+      <keyMapping columnObjectName="Join_1" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="QUANTITYUNIT" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Quantity Unit"/>
+      <keyMapping columnObjectName="Join_1" columnName="QUANTITYUNIT"/>
+    </attribute>
+    <attribute id="TESTE" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TESTE"/>
+      <keyMapping columnObjectName="Join_1" columnName="TESTE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="GROSSAMOUNTTOTAL" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Gross Amount"/>
+      <measureMapping columnObjectName="Join_1" columnName="GROSSAMOUNTTOTAL"/>
+    </measure>
+    <measure id="NETAMOUNTTOTAL" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Net Amount"/>
+      <measureMapping columnObjectName="Join_1" columnName="NETAMOUNTTOTAL"/>
+    </measure>
+    <measure id="TAXAMOUNTTOTAL" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Tax Amount"/>
+      <measureMapping columnObjectName="Join_1" columnName="TAXAMOUNTTOTAL"/>
+    </measure>
+    <measure id="GROSSAMOUNT" order="8" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Gross Amount"/>
+      <measureMapping columnObjectName="Join_1" columnName="GROSSAMOUNT"/>
+    </measure>
+    <measure id="NETAMOUNT" order="9" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Net Amount"/>
+      <measureMapping columnObjectName="Join_1" columnName="NETAMOUNT"/>
+    </measure>
+    <measure id="TAXAMOUNT" order="10" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Tax Amount"/>
+      <measureMapping columnObjectName="Join_1" columnName="TAXAMOUNT"/>
+    </measure>
+    <measure id="QUANTITY" order="11" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Quantity"/>
+      <measureMapping columnObjectName="Join_1" columnName="QUANTITY"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures>
+    <measure id="GROSSPRICE" order="13" aggregationType="sum" measureType="simple" datatype="REAL" expressionLanguage="COLUMN_ENGINE">
+      <descriptions defaultDescription="Gross Price"/>
+      <formula>&quot;GROSSAMOUNT&quot;/&quot;QUANTITY&quot;</formula>
+      
+      </measure>
+    <measure id="NETPRICE" order="14" aggregationType="sum" measureType="simple" datatype="REAL" expressionLanguage="COLUMN_ENGINE">
+      <descriptions defaultDescription="Net Price"/>
+      <formula>&quot;NETAMOUNT&quot;/&quot;QUANTITY&quot;</formula>
+      
+      </measure>
+    <measure id="NETPERC" order="16" aggregationType="sum" measureType="simple" datatype="REAL" expressionLanguage="COLUMN_ENGINE">
+      <formula>&quot;NETAMOUNT&quot;/&quot;NETAMOUNTTOTAL&quot;</formula>
+      
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="208"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="SAP_HANA_MTA.APP.Data_Transformation::CV_PURCHASEORDERHEADER" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="-34" y="33"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="SAP_HANA_MTA.APP.Data_Base::PurchaseOrder.Item" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="252"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
